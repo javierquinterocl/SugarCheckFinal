@@ -1,5 +1,5 @@
 <script setup>
-import {  RouterView } from 'vue-router'
+import {  RouterLink } from 'vue-router'
 import { ref } from 'vue';
 
  const valor = ref(true);
