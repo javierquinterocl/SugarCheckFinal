@@ -44,7 +44,7 @@ console.log(valor);
 					
 
 					<input type="email" name="" id="" placeholder="Correo" class=" mt-8 border-b-2 border-gray-200 p-1 outline-none" v-if="valor2">
-					<input type="email" name="" id="" placeholder="Contraseña" class=" mt-8 border-b-2 border-gray-200 p-1 outline-none"  v-if="valor2">
+					<input type="password" name="" id="" placeholder="Contraseña" class=" mt-8 border-b-2 border-gray-200 p-1 outline-none"  v-if="valor2">
 					<RouterLink to="/dashboard"  class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-8"  v-if="valor2" >Iniciar Sesion</RouterLink>
 
 				</div>
