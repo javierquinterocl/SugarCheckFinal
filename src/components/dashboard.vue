@@ -3,6 +3,12 @@
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 
+
+
+
+
+
+
 const ventana = ref(false);
 const ventana2 = ref(false);
 
@@ -11,6 +17,7 @@ const peso = ref("");
 const altura = ref();
 const imc = ref(0);
 const tipo = ref("Calcule primero su IMC")
+
 //GLUCOSA
 
 const militros = ref(0);
@@ -34,6 +41,11 @@ function closedventana2() {
 
     glucosa.value = Math.round((militros.value / 100) * azucar.value);
     total.value += glucosa.value;
+
+    if(azucar.value > 0){
+       militros.value = "";
+       azucar.value = "";
+    }
 }
 function closedventana() {
     ventana.value = false;
@@ -74,10 +86,13 @@ function closedventana() {
         peso.value = "";
         altura.value = "";
         
-    }
-
-    
+    } 
 }
+
+//Chart
+
+
+
 
 
 
@@ -108,7 +123,7 @@ function closedventana() {
             </li>
 
             <li class="mb-1 group">
-                <a href="#"
+                <a href="#" @click="openventana2()"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
                     <i class="ri-flashlight-line mr-3 text-lg"></i>
                     <span class="text-sm">Calcular Glucosa</span>
@@ -153,7 +168,10 @@ function closedventana() {
 
                 <div class="   rounded-md border border-gray-100 p-12 shadow-md shadow-black/5 "
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 }">
+                    <!-- <input class=" 
+                     border-none " type="range" min="0" max="40" step="1" v-bind:value="imc" id="range"  > -->
                     <div class="flex justify-between mb-6">
+                    
                         <div>
                             <div class="text-2xl font-semibold mb-1">IMC Calculado = {{ imc }}</div>
                             <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
@@ -167,8 +185,8 @@ function closedventana() {
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 }">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">Su Glucosa es = {{ total }}</div>
-                            <div class="text-sm font-medium text-gray-400">Azucar/..</div>
+                            <div class="text-2xl font-semibold mb-1">Su Azucar consumida es = {{ total }}</div>
+                            <div class="text-sm font-medium text-gray-400"></div>
                         </div>
 
                     </div>
@@ -176,8 +194,10 @@ function closedventana() {
                         class="text-blue-500 font-medium text-sm hover:text-blue-600">Calcular Glucosa</button>
                 </div>
 
-
+            
             </div>
+
+            <Line :data="data" :options="options" />
             <div class=" p-16  border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl mb-20 my-[-6rem] relative bg-white z-50"
                 v-if="ventana">
                 <div class=" cursor-pointer right-10 top-8 absolute" @click="closedventana()">
@@ -192,18 +212,18 @@ function closedventana() {
                 <p class="mx-auto mb-8 font-semibold text-2xl mt-4">INGRESE DATOS IMC</p>
 
                 <label class="font-semibold " for="">Ingrese su peso</label>
-                <input type="text" name="" id="Peso" v-model="peso" placeholder="Peso"
+                <input type="text" name="" id="Peso" v-model="peso" placeholder="Peso(Kg)"
                     class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
                 <label for="" class="mt-3 font-semibold">Ingrese su altura</label>
-                <input type="text" name="" id="Altura" v-model="altura" placeholder="Altura"
+                <input type="text" name="" id="Altura" v-model="altura" placeholder="Altura (m)"
                     class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
                 <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-8 "
                     @click="closedventana()">Calcular</button>
             </div>
-
+                 
             <div class=" p-16 border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl my-[-6rem] relative bg-white z-50  "
                 v-if="ventana2">
-                <div class=" cursor-pointer  right-10 top-8 absolute" @click="closedventana2">
+                <div class=" cursor-pointer  right-10 top-8 absolute" @click="closedventana2()">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -222,7 +242,7 @@ function closedventana() {
                 <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-8 "
                     @click="closedventana2()">Calcular</button>
             </div>
-
+           
         </div>
 
 
