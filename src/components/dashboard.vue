@@ -11,20 +11,27 @@ import { ref } from 'vue';
 
 const ventana = ref(false);
 const ventana2 = ref(false);
+const ventana3 = ref(false);
+const tipo = ref("Calcular primero");
 
 //IMC
-const peso = ref("");
+const peso = ref();
 const altura = ref();
 const imc = ref(0);
-const tipo = ref("Calcule primero su IMC")
+
 
 //GLUCOSA
 
-const militros = ref(0);
-const azucar = ref(0);
+const militros = ref();
+const azucar = ref();
 const glucosa = ref(0)
 const total = ref(0);
+
 const contador = ref(0);
+
+//AZUCAR EN LA SANGRE
+const concentracion = ref();
+const nivelAzucar = ref(0);
 
 function openventana() {
     ventana.value = true;
@@ -33,6 +40,11 @@ function openventana() {
 }
 function openventana2() {
     ventana2.value = true;
+    ventana.value = false;
+}
+
+function openventana3() {
+    ventana3.value = true;
     ventana.value = false;
 }
 
@@ -46,6 +58,26 @@ function closedventana2() {
        militros.value = "";
        azucar.value = "";
     }
+}
+
+function closedventana3() {
+    ventana3.value = false;
+
+    if (concentracion.value === ""){
+        nivelAzucar.value = "Ingrese primero su concentracion de azucar"
+    }
+    if (concentracion.value <= 140) {
+        nivelAzucar.value = "Normal"
+        
+    }
+    else if (concentracion.value > 140 && concentracion.value <= 199 ){
+        nivelAzucar.value = "Prediabetes"
+    }
+    if (concentracion.value >= 200) {
+        nivelAzucar.value = "Diabetes"
+    }
+    
+    
 }
 function closedventana() {
     ventana.value = false;
@@ -126,6 +158,22 @@ function closedventana() {
                 <a href="#" @click="openventana2()"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
                     <i class="ri-flashlight-line mr-3 text-lg"></i>
+                    <span class="text-sm">Calcular Azucar</span>
+                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                </a>
+                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Manage
+                            services</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="mb-1 group">
+                <a href="#" @click="openventana3()"
+                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <i class="ri-flashlight-line mr-3 text-lg"></i>
                     <span class="text-sm">Calcular Glucosa</span>
                     <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
                 </a>
@@ -137,6 +185,23 @@ function closedventana() {
                     </li>
                 </ul>
             </li>
+
+            <li class="mb-1 group">
+                <a href="#" 
+                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <i class="ri-flashlight-line mr-3 text-lg"></i>
+                    <span class="text-sm">Somatotipo</span>
+                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                </a>
+                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Manage
+                            services</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="mb-1 group">
                 <RouterLink to="/"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
@@ -171,7 +236,7 @@ function closedventana() {
                     <!-- <input class=" 
                      border-none " type="range" min="0" max="40" step="1" v-bind:value="imc" id="range"  > -->
                     <div class="flex justify-between mb-6">
-                    
+
                         <div>
                             <div class="text-2xl font-semibold mb-1">IMC Calculado = {{ imc }}</div>
                             <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
@@ -185,8 +250,8 @@ function closedventana() {
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 }">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">Su Azucar consumida es = {{ total }}</div>
-                            <div class="text-sm font-medium text-gray-400"></div>
+                            <div class="text-2xl font-semibold mb-1">Azucar consumida = {{ total }}</div>
+                            <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
                         </div>
 
                     </div>
@@ -194,55 +259,88 @@ function closedventana() {
                         class="text-blue-500 font-medium text-sm hover:text-blue-600">Calcular Glucosa</button>
                 </div>
 
-            
+                <div class="  rounded-md border border-gray-100 p-12 shadow-md shadow-black/5"
+                    v-bind:class="{ ' border-none blur-sm': ventana || ventana3 }">
+                    <div class="flex justify-between mb-6">
+                        <div>
+                            <div class="text-2xl font-semibold mb-1">Nivel de azucar = {{ nivelAzucar }}</div>
+                            <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
+                        </div>
+
+                    </div>
+                    <button @click="openventana3()" href="#"
+                        class="text-blue-500 font-medium text-sm hover:text-blue-600">Calcular azucar en la
+                        sangre</button>
+                </div>
+
+
             </div>
 
             <Line :data="data" :options="options" />
             <div class=" p-16  border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl mb-20 my-[-6rem] relative bg-white z-50"
                 v-if="ventana">
                 <div class=" cursor-pointer right-10 top-8 absolute" @click="closedventana()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
-                    stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
 
                 </div>
-               
+
 
                 <p class="mx-auto mb-8 font-semibold text-2xl mt-4">INGRESE DATOS IMC</p>
 
-                <label class="font-semibold " for="">Ingrese su peso</label>
+                <label class="font-semibold " for="">Ingrese su peso: </label>
                 <input type="text" name="" id="Peso" v-model="peso" placeholder="Peso(Kg)"
                     class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
-                <label for="" class="mt-3 font-semibold">Ingrese su altura</label>
+                <label for="" class="mt-3 font-semibold">Ingrese su altura: </label>
                 <input type="text" name="" id="Altura" v-model="altura" placeholder="Altura (m)"
                     class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
                 <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-8 "
                     @click="closedventana()">Calcular</button>
             </div>
-                 
+
             <div class=" p-16 border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl my-[-6rem] relative bg-white z-50  "
                 v-if="ventana2">
                 <div class=" cursor-pointer  right-10 top-8 absolute" @click="closedventana2()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
-                    stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
 
                 </div>
 
                 <p class="mx-auto mb-8 font-semibold text-2xl">INGRESE DATOS GLUCOSA</p>
 
-                <label class="font-semibold " for="">Ingrese la azucar </label>
+                <label class="font-semibold " for="">Ingrese el azucar: </label>
                 <input type="text" name="" id="Gramos" v-model="azucar" placeholder="g"
                     class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
-                <label for="" class="mt-3 font-semibold">Ingrese los militros </label>
+                <label for="" class="mt-3 font-semibold">Ingrese los militros: </label>
                 <input type="text" name="" id="Altura" v-model="militros" placeholder="ml"
                     class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
                 <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-8 "
                     @click="closedventana2()">Calcular</button>
             </div>
-           
+
+            <div class=" p-16 border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl my-[-6rem] relative bg-white z-50  "
+                v-if="ventana3">
+                <div class=" cursor-pointer  right-10 top-8 absolute" @click="closedventana3()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+
+                </div>
+
+                <p class="mx-auto mb-20 font-semibold text-2xl">INGRESE DATOS GLUCOMETRO</p>
+
+                <label class="font-semibold " for="">Ingrese la concentracion de azucar en la sangre: </label>
+                <input type="text" name="" id="Concentracion" v-model="concentracion" placeholder="mg/dl"
+                    class=" mt-5 mb-3 border-b-2 border-gray-200 p-1 outline-none rounded">
+                <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-12 "
+                    @click="closedventana3()">Calcular</button>
+            </div>
+
         </div>
 
 
