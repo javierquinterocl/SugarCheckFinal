@@ -263,7 +263,7 @@ function closedventana() {
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana3 }">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">Nivel de azucar = {{ nivelAzucar }}</div>
+                            <div class="text-2xl font-semibold mb-1">Nivel de azucar :v = {{ nivelAzucar }}</div>
                             <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
                         </div>
 
