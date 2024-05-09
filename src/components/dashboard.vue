@@ -2,16 +2,19 @@
 
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
+import  BarChart from "./BarChart.vue"
 
 
-
-
+// 
 
 
 
 const ventana = ref(false);
 const ventana2 = ref(false);
 const ventana3 = ref(false);
+const ventanasoma  = ref(false);
+
+
 const tipo = ref("Calcular primero");
 
 //IMC
@@ -33,18 +36,31 @@ const contador = ref(0);
 const concentracion = ref();
 const nivelAzucar = ref(0);
 
+
+//SOMATOTIPO
+
+const somaimg = ref(true);
+const ectomorfo = ref(false);
+const mesomorfo = ref(false);
+const endomorfo = ref(false);
+
+
 function openventana() {
     ventana.value = true;
     ventana2.value = false;
+    ventanasoma.value = false,
     console.log('Muestra');
 }
 function openventana2() {
+    ventanasoma.value = false;
     ventana2.value = true;
     ventana.value = false;
 }
 
 function openventana3() {
     ventana3.value = true;
+    ventanasoma.value = false;
+    ventana2.value = false;
     ventana.value = false;
 }
 
@@ -121,6 +137,38 @@ function closedventana() {
     } 
 }
 
+function somatotipoOpen(){
+    ventanasoma.value = true;
+    ventana3.value = false;
+    ventana2.value = false;
+    ventana.value = false;
+}
+
+function somatotipoclose(){
+    ventanasoma.value = false;
+}
+
+function calcularsoma(calculado){
+    if(calculado == "mesomorfo"){
+        somaimg.value = false;
+        mesomorfo.value = true;
+        ectomorfo.value = false;
+        endomorfo.value = false;
+    }
+    if(calculado == "ectomorfo"){
+        somaimg.value = false;
+        ectomorfo.value = true;
+        mesomorfo.value = false;
+        endomorfo.value = false;
+    }
+    if(calculado == "endomorfo"){
+        somaimg.value = false;
+        endomorfo.value = true;
+        ectomorfo.value = false;
+        mesomorfo.value = false;
+    }
+
+}
 //Chart
 
 
@@ -129,6 +177,8 @@ function closedventana() {
 
 
 </script>
+
+
 
 <template>
     <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 transition-transform">
@@ -140,16 +190,16 @@ function closedventana() {
             <li class="mb-1 group active">
                 <a
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class="ri-home-2-line mr-3 text-lg"></i>
+                   
                     <span class="text-sm">Dashboard</span>
                 </a>
             </li>
             <li class="mb-1 group">
                 <button @click="openventana()"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    
                     <button class="text-sm">Calcular IMC</button>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                  
                 </button>
 
             </li>
@@ -157,57 +207,39 @@ function closedventana() {
             <li class="mb-1 group">
                 <a href="#" @click="openventana2()"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class="ri-flashlight-line mr-3 text-lg"></i>
+                    
                     <span class="text-sm">Calcular Azucar</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                   
                 </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="#"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Manage
-                            services</a>
-                    </li>
-                </ul>
+               
             </li>
 
             <li class="mb-1 group">
                 <a href="#" @click="openventana3()"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class="ri-flashlight-line mr-3 text-lg"></i>
+                  
                     <span class="text-sm">Calcular Glucosa</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                    
                 </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="#"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Manage
-                            services</a>
-                    </li>
-                </ul>
+                
             </li>
 
             <li class="mb-1 group">
-                <a href="#" 
+                <a href="#" @click="somatotipoOpen()"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class="ri-flashlight-line mr-3 text-lg"></i>
+                   
                     <span class="text-sm">Somatotipo</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                 
                 </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="#"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Manage
-                            services</a>
-                    </li>
-                </ul>
+                
             </li>
 
             <li class="mb-1 group">
                 <RouterLink to="/"
                     class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    
                     <span class="text-sm">Cerrar Sesion</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                  
                 </RouterLink>
 
             </li>
@@ -225,14 +257,14 @@ function closedventana() {
 
     <!-- start: Main -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main"
-        v-bind:class="{ 'bg-[rgba(0,0,0,0.51)]': ventana || ventana2 }">
+        v-bind:class="{ 'bg-[rgba(0,0,0,0.51)]': ventana || ventana2 || ventana3 || ventanasoma}">
 
         <div class="p-6 pt-16 bg-none">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6  z-0 relative">
 
                 <div class="   rounded-md border border-gray-100 p-12 shadow-md shadow-black/5 "
-                    v-bind:class="{ ' border-none blur-sm': ventana || ventana2 }">
+                    v-bind:class="{ ' border-none blur-sm': ventana || ventana2  || ventana3 || ventanasoma }">
                     <!-- <input class=" 
                      border-none " type="range" min="0" max="40" step="1" v-bind:value="imc" id="range"  > -->
                     <div class="flex justify-between mb-6">
@@ -247,7 +279,7 @@ function closedventana() {
                         class="text-blue-500 font-medium text-sm hover:text-blue-600">Calcular IMC</button>
                 </div>
                 <div class="  rounded-md border border-gray-100 p-12 shadow-md shadow-black/5"
-                    v-bind:class="{ ' border-none blur-sm': ventana || ventana2 }">
+                    v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma  }">
                     <div class="flex justify-between mb-6">
                         <div>
                             <div class="text-2xl font-semibold mb-1">Azucar consumida = {{ total }}</div>
@@ -260,7 +292,7 @@ function closedventana() {
                 </div>
 
                 <div class="  rounded-md border border-gray-100 p-12 shadow-md shadow-black/5"
-                    v-bind:class="{ ' border-none blur-sm': ventana || ventana3 }">
+                    v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }">
                     <div class="flex justify-between mb-6">
                         <div>
                             <div class="text-2xl font-semibold mb-1">Nivel de azucar :v = {{ nivelAzucar }}</div>
@@ -272,11 +304,12 @@ function closedventana() {
                         class="text-blue-500 font-medium text-sm hover:text-blue-600">Calcular azucar en la
                         sangre</button>
                 </div>
+                
 
 
             </div>
 
-            <Line :data="data" :options="options" />
+            
             <div class=" p-16  border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl mb-20 my-[-6rem] relative bg-white z-50"
                 v-if="ventana">
                 <div class=" cursor-pointer right-10 top-8 absolute" @click="closedventana()">
@@ -341,9 +374,54 @@ function closedventana() {
                     @click="closedventana3()">Calcular</button>
             </div>
 
+            <!-- //Somatotipo ventana -->
+
+            <div class=" p-16 border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl my-[-6rem] relative bg-white z-50  "
+                v-if="ventanasoma">
+                <div class=" cursor-pointer  right-10 top-8 absolute" @click="somatotipoclose()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+
+                </div>
+
+                <p class="mx-auto mb-10 font-semibold text-2xl">CUAL ES SU SOMATOTIPO</p>
+
+                <label class="font-semibold mx-auto text-gray-500" for="">Selecione uno para conocer sus caracteristicas: </label>
+                <div class=" flex space-x-6 mx-auto">
+                    <button class=" p-2 text-center rounded-md bg-[#4365d6] text-white mt-12 "
+                    @click="calcularsoma('ectomorfo')">Ectomorfo</button>
+                    <button class=" p-2 text-center rounded-md bg-[#dd6e42] text-white mt-12 "
+                    @click="calcularsoma('mesomorfo')">Mesomorfo</button>
+                    <button class=" p-2 text-center rounded-md bg-[#b63737] text-white mt-12 "
+                    @click="calcularsoma('endomorfo')">Endomorfo</button>
+
+                </div>
+                <div class=" mt-12 rounded-xl">
+                    <img class="rounded-xl" src="/src/img/somatotipo.gif" alt="" v-if="somaimg">
+                    <img class="rounded-xl" src="/src/img/mesomorfo.jpg" alt="" v-if="mesomorfo">
+                    <img class="rounded-xl" src="/src/img/endomorfo.jpg" alt="" v-if="endomorfo">
+                    <img class="rounded-xl" src="/src/img/ectomorfo.jpg" alt="" v-if="ectomorfo">
+                    
+
+                </div>
+                
+               
+            </div>
+          
+            
         </div>
+        <div class=" rounded-md border border-gray-100 p-12 shadow-md shadow-black/5 mx-auto flex z-2"
+                    v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if=" true">
+                    <div class="flex mx-auto">
+                        <BarChart width="600px"/>
 
 
+                    </div>
+                    
+                </div>
+ 
 
 
     </main>
