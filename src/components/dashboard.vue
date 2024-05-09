@@ -256,7 +256,7 @@ function calcularsoma(calculado){
     <!-- end: Sidebar -->
 
     <!-- start: Main -->
-    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main"
+    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50  transition-all main"
         v-bind:class="{ 'bg-[rgba(0,0,0,0.51)]': ventana || ventana2 || ventana3 || ventanasoma}">
 
         <div class="p-6 pt-16 bg-none">
@@ -295,7 +295,7 @@ function calcularsoma(calculado){
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">Nivel de azucar :v = {{ nivelAzucar }}</div>
+                            <div class="text-2xl font-semibold mb-1">Nivel de azucar = {{ nivelAzucar }}</div>
                             <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
                         </div>
 
@@ -414,16 +414,24 @@ function calcularsoma(calculado){
         </div>
         <div class=" rounded-md border border-gray-100 p-12 shadow-md shadow-black/5 mx-auto flex z-2"
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if=" true">
-                    <div class="flex mx-auto">
-                        <BarChart width="600px"/>
+                <div class="flex mx-auto">
+                    <BarChart width="1200px"/>
+                </div>            
+        </div>
 
-
-                    </div>
-                    
-                </div>
- 
-
-
+        <div class="bg-white pt-14 mx-auto ">
+            <div class=" text-2xl text-center font-semibold">
+                <span class="text-blue-600">Sugar</span><span class=""> Check</span>
+            </div>
+            <div class="text-center text-gray-600">
+                A hearing aid is an electronic device worn inside or behind the ear. Amplifies certain sounds
+            </div>
+            <div class="bg-white h-14 flex items-center mt-5 ">
+                <footer class="container max-w-6xl mx-auto flex justify-center">
+                    <img src="/src/img/LogoufpsoMen17.png" class="h-10 w-40">
+                </footer>
+            </div>
+        </div>
     </main>
     <!-- end: Main -->
 
