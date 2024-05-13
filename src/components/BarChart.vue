@@ -35,8 +35,8 @@ const chartData = {
   ],
   datasets: [
     {
-      label: 'Data One',
-      backgroundColor: '#4365d6',
+      
+      backgroundColor: '#2d3688',
       data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
       width: '1200px',
     }
