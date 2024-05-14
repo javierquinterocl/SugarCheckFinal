@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 import BarChart from "./BarChart.vue"
 import NavBar from './NavBar.vue';
+import { VuePDF, usePDF } from '@tato30/vue-pdf'
 
 
 // 
@@ -49,11 +50,7 @@ const endomorfo = ref(false);
 
 // PDF
 
-const pdf = ref(false);
 
-function leerpdf() {
-    pdf.value = true;
-}
 function openventana() {
     ventana.value = true;
     ventana2.value = false;
@@ -179,6 +176,35 @@ function calcularsoma(calculado) {
 
 }
 //Chart
+
+
+
+// CALCULAR PDF
+const file = ref('');
+const recibido = ref(true);
+const pdfLoaded = ref(false);
+
+function files(src) {
+    file.value = src.target.files[0].name;
+    recibido.value = false;
+    pdfLoaded.value = true;
+    console.log('Archivo seleccionado:', file.value);
+    onLoaded();
+}
+const { pdf, pages, info } = usePDF('/src/pdf/informe.pdf')
+
+function onLoaded(value) {
+    return console.log(value.textContent.items[0].str)
+}
+
+const pdfs = ref(false);
+
+function leerpdf() {
+    pdfs.value = true;
+}
+function closedpdf() {
+    pdfs.value = false;
+}
 
 
 
@@ -470,15 +496,7 @@ function calcularsoma(calculado) {
                         Añadir
                     </button>
                 </form>
-                <!-- 
-                <label class="font-semibold " for="">Ingrese el azucar: </label>
-                <input type="text" name="" id="Gramos" v-model="azucar" placeholder="g"
-                    class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
-                <label for="" class="mt-3 font-semibold">Ingrese los militros: </label>
-                <input type="text" name="" id="Altura" v-model="militros" placeholder="ml"
-                    class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
-                <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-8 "
-                    @click="closedventana2()">Calcular</button> -->
+
 
 
             </div>
@@ -545,8 +563,8 @@ function calcularsoma(calculado) {
 
         <!-- VENTANA PDF -->
 
-        <div class=" p-16 border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] flex-col flex shadow-2xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white z-50 absolute  "
-            v-if="pdf">
+        <div class=" p-16 border border-blue-950 border-opacity-70 rounded-xl mx-auto w-[40rem] overflow-hidden flex-col flex shadow-2xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-white z-50 absolute  "
+            v-if="pdfs">
             <div class=" cursor-pointer  right-10 top-8 absolute" @click="closedpdf()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -558,7 +576,9 @@ function calcularsoma(calculado) {
             <p class="mx-auto mb-10 font-semibold text-2xl">LECTOR DE PDF MEDICO</p>
             <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Como funciona? Ingrese un PDF medico donde
                 le haremos unas indicaciones segun la informacion proporcionada </label>
-            <div class="flex items-center justify-center w-full">
+            <VuePDF v-if="pdfLoaded" :pdf="pdf" @text-loaded="onLoaded"
+                class=" w-60 h-96 text-center items-center flex justify-center" />
+            <div class="flex items-center justify-center w-full mb-7" v-if="recibido">
                 <label for="dropzone-file"
                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -572,12 +592,12 @@ function calcularsoma(calculado) {
                                 Subir</span> o arrastra el archivo</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">PDF, .TXT, XML or CSV (MAX. 5.12MB)</p>
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" />
+                    <input id="dropzone-file" @change="files($event)" type="file" class="hidden" />
                 </label>
             </div>
 
-            <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-12 "
-                @click="closedventana3()">Agregar</button>
+            <button class=" p-2 text-center absolute rounded-md bg-[#2D3688] text-white mt-12 bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                @click="closedpdf()">Agregar</button>
         </div>
 
         <div class="flex justify-between ">
@@ -596,7 +616,8 @@ function calcularsoma(calculado) {
                     </a>
                     <div class="p-5">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Grafica Segun Tu Informacion</h5>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Grafica
+                                Segun Tu Informacion</h5>
                         </a>
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"></p>
                         <a href="#"
