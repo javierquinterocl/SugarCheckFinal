@@ -5,7 +5,8 @@ import { ref } from 'vue';
 import BarChart from "./BarChart.vue"
 import NavBar from './NavBar.vue';
 import { VuePDF, usePDF } from '@tato30/vue-pdf'
-
+import Bar from './Bar.vue'
+import Rounded from './Rounded.vue'
 
 // 
 
@@ -596,45 +597,34 @@ function closedpdf() {
                 </label>
             </div>
 
-            <button class=" p-2 text-center absolute rounded-md bg-[#2D3688] text-white mt-12 bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            <button
+                class=" p-2 text-center absolute rounded-md bg-[#2D3688] text-white mt-12 bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 @click="closedpdf()">Agregar</button>
         </div>
 
-        <div class="flex justify-between ">
-            <div class=" rounded-md border border-gray-100 p-6   flex z-2 w-[700px] "
+        <div class="flex w-full  ">
+            <div class=" rounded-md border border-gray-100 p-6   flex z-2 w-[1200px] "
                 v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md">
                     <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Azucar Consumida </label>
-                    <BarChart width="800px" />
+
+                    <Bar />
                 </div>
             </div>
-            <div class=" rounded-md border border-gray-100 p-6   flex z-2 w-[700px] "
-                v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
+
+
+            <div class=" rounded-md border border-gray-100 py-6    flex z-2 w-[600px]">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md">
-                    <a href="#">
-                        <img class="rounded-t-lg" src="./src/ectomorfo.jpg" alt="" />
-                    </a>
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Grafica
-                                Segun Tu Informacion</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"></p>
-                        <a href="#"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#3d2f8b] rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                            Calcular
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
-                    </div>
+                    <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Trigliceridos</label>
+
+                    <Rounded />
                 </div>
             </div>
-
-
         </div>
+        
+        
+
+        
 
 
 
