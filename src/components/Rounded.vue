@@ -3,8 +3,8 @@ import { ref, onMounted } from 'vue';
 
 const getChartOptions = () => {
     return {
-        series: [12.5, 3.5],
-        colors: ["#1C64F2", "#fff", "#fff", "#fff"],
+        series: [12.5, 3.5, 1.5],
+        colors: ["#1C64F2", "#F7F006", "#FE0E0E", "#fff"],
         chart: {
             height: 1200,
             width: "100%",
