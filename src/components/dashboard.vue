@@ -347,7 +347,7 @@ function closedpdf() {
 
     <!-- start: Main -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-[#f3f4f6]  transition-all main"
-        v-bind:class="{ 'bg-[rgba(0,0,0,0.51)]': ventana || ventana2 || ventana3 || ventanasoma }">
+        v-bind:class="{ '': ventana || ventana2 || ventana3 || ventanasoma }">
 
         <div class="p-6 bg-none">
             <NavBar />
@@ -357,9 +357,8 @@ function closedpdf() {
                 <div class="   rounded-md border border-gray-100 bg-white p-12 shadow-md shadow-black/5 "
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }">
 
-                    <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                        <div class="bg-[#2d3688] text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full mb-8"
-                            style="width: 45%"> 250</div>
+                    <div class="w-full  rounded-full ">
+                        
                     </div>
 
                     <div class="flex justify-between mb-6">
@@ -377,7 +376,7 @@ function closedpdf() {
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">Azucar consumida <br> {{ total }}</div>
+                            <div class="text-2xl font-semibold mb-1">Azucar consumida  <br> {{ total }} g</div>
                             <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
                         </div>
 
@@ -575,10 +574,13 @@ function closedpdf() {
             </div>
 
             <p class="mx-auto mb-10 font-semibold text-2xl">LECTOR DE PDF MEDICO</p>
-            <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Como funciona? Ingrese un PDF medico donde
+            <label class="font-semibold mx-auto text-gray-500 " for="">Como funciona? Ingrese un PDF medico donde
                 le haremos unas indicaciones segun la informacion proporcionada </label>
-            <VuePDF v-if="pdfLoaded" :pdf="pdf" @text-loaded="onLoaded"
-                class=" w-60 h-96 text-center items-center flex justify-center" />
+            <div class=" text-center w-[500px] h-[800px] mx-auto flex justify-center" v-if="pdfLoaded">
+                <VuePDF  :pdf="pdf" @text-loaded="onLoaded"></VuePDF>
+
+            </div>
+                
             <div class="flex items-center justify-center w-full mb-7" v-if="recibido">
                 <label for="dropzone-file"
                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -609,6 +611,7 @@ function closedpdf() {
                     <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Azucar Consumida </label>
 
                     <Bar />
+                    
                 </div>
             </div>
 
@@ -618,6 +621,9 @@ function closedpdf() {
                     <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Trigliceridos</label>
 
                     <Rounded />
+                    <button
+                class=" p-2  rounded-md bg-[#2D3688] text-white mt-12 "
+                @click="leerpdf()">Agregar</button>
                 </div>
             </div>
         </div>
