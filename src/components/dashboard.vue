@@ -190,22 +190,76 @@ function files(src) {
     recibido.value = false;
     pdfLoaded.value = true;
     console.log('Archivo seleccionado:', file.value);
+    
     onLoaded();
 }
-const { pdf, pages, info } = usePDF('/src/pdf/informe.pdf')
+const { pdf, pages, info } = usePDF('/src/pdf/informe1.pdf')
 
 function onLoaded(value) {
     return console.log(value.textContent.items[0].str)
+    
 }
 
 const pdfs = ref(false);
 
 function leerpdf() {
     pdfs.value = true;
+    
+
 }
+
+
+const glucosacal = ref(0);
+const triglicerido = ref(0);
+const colesterol = ref(0);
+const glucosacalrango = ref('')
+const triglirango = ref('')
+const colesterolrango = ref('')
+const refresh = ref(0);
+
+const childref = ref(null)
+
 function closedpdf() {
-    pdfs.value = false;
+   
+    
+ pdfs.value= false;
+    if (file.value == 'informe1.pdf') {
+        glucosacal.value = 90
+        glucosacalrango.value = 'Medio', triglirango.value = 'Medio', colesterolrango.value = 'Medio';
+        triglicerido.value = 140;
+        colesterol.value = 180;
+        
+    }
+
+    if (file.value == 'informe2.pdf') {
+        glucosacal.value = 60
+        glucosacalrango.value = 'Bajo', triglirango.value = 'Bajo', colesterolrango.value = 'Bajo';
+        triglicerido.value = 70;
+        colesterol.value = 120;
+       
+    }
+    if (file.value == 'informe3.pdf') {
+        glucosacal.value = 130
+        glucosacalrango.value = 'Alto', triglirango.value = 'Alto', colesterolrango.value = 'Alto'
+        triglicerido.value = 220;
+        colesterol.value = 240;
+        
+    }
+    refresh.value++;
+    
+       
+    
+
+
+       
+    
+    
+   
+    
 }
+
+
+
 
 
 
@@ -358,12 +412,16 @@ function closedpdf() {
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }">
 
                     <div class="w-full  rounded-full ">
-                        
+
                     </div>
 
                     <div class="flex justify-between mb-6">
 
                         <div>
+                            <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class=" bg-gradient-to-r from-indigo-500 to-purple-500 text-xs mb-5 font-medium text-blue-100 text-center leading-none rounded-full "
+                                    :style="{ width: imc + '0px' }"> {{ imc }}</div>
+                            </div>
                             <div class="text-2xl font-semibold mb-1">IMC Calculado = {{ imc }}</div>
                             <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
                         </div>
@@ -376,7 +434,7 @@ function closedpdf() {
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }">
                     <div class="flex justify-between mb-6">
                         <div>
-                            <div class="text-2xl font-semibold mb-1">Azucar consumida  <br> {{ total }} g</div>
+                            <div class="text-2xl font-semibold mb-1">Azucar consumida <br> {{ total }} g</div>
                             <div class="text-sm font-medium text-gray-400">{{ tipo }}</div>
                         </div>
 
@@ -576,13 +634,13 @@ function closedpdf() {
             <p class="mx-auto mb-10 font-semibold text-2xl">LECTOR DE PDF MEDICO</p>
             <label class="font-semibold mx-auto text-gray-500 " for="">Como funciona? Ingrese un PDF medico donde
                 le haremos unas indicaciones segun la informacion proporcionada </label>
-            <div class=" text-center w-[500px] h-[800px] mx-auto flex justify-center" v-if="pdfLoaded">
-                <VuePDF  :pdf="pdf" @text-loaded="onLoaded"></VuePDF>
+            <div class=" text-center w-[500px] h-[800px] mx-auto flex justify-center blur-sm" v-if="pdfLoaded">
+                <VuePDF :pdf="pdf" @text-loaded="onLoaded"></VuePDF>
 
             </div>
-                
+
             <div class="flex items-center justify-center w-full mb-7" v-if="recibido">
-                <label for="dropzone-file"
+                <label for="dropzone-file" 
                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -599,38 +657,124 @@ function closedpdf() {
                 </label>
             </div>
 
-            <button
+            <button @click="closedpdf()"
                 class=" p-2 text-center absolute rounded-md bg-[#2D3688] text-white mt-12 bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                @click="closedpdf()">Agregar</button>
+               >Agregar</button>
         </div>
 
-        <div class="flex w-full  ">
-            <div class=" rounded-md border border-gray-100 p-6   flex z-2 w-[1200px] "
+        <div class="grid  grid-flow-col  place-content-stretch  ">
+            <div class=" rounded-md border border-gray-100 p-6   flex z-2  col-span-2 "
+                v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
+                <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md ">
+                    <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Azucar Consumida </label>
+
+                    <div class="relative  shadow-md sm:rounded-lg place-self-center w-[1000px] overflow-hidden ">
+                        <table
+                            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 overflow-hidden  mb-10">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 w-full overflow-hidden">
+                                <tr>
+                                    <th scope="col" class="px-6 pb-10">
+                                        Examen Realizado
+                                    </th>
+                                    <th scope="col" class="px-10 pb-10">
+                                        Rango
+                                    </th>
+                                    <th scope="col" class="px-6 pb-10">
+
+                                    </th>
+                                    <th scope="col" class="px-6 pb-10">
+
+                                    </th>
+                                    <th scope="col" class="px-6 pb-10">
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class=" border-b dark:bg-gray-800 dark:border-gray-700 mb-2 bg-[#fff] ">
+                                    <th scope="row "
+                                        class="px-6 py-10 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Glucosa
+                                    </th>
+                                    <td class="px-6 py-10 w-[600px] absolute overflow-hidden ">
+                                        <div class=" bg-gray-200 rounded-full dark:bg-gray-700  ">
+                                            <div class=" bg-gradient-to-r py-2   from-indigo-500 to-purple-500 text-xs mb-5  font-medium text-blue-100 text-center leading-none rounded-full "
+                                                :style="{ width: (glucosacal* 3 )+ 'px' }"><span>{{ glucosacal+' / '+glucosacalrango }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row"
+                                        class="px-6 py-10 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Trigliceridos
+                                    </th>
+                                    <td class="px-6 py-10 w-[600px] absolute overflow-hidden">
+                                        <div class=" bg-gray-200 rounded-full dark:bg-gray-700">
+                                            <div class=" bg-gradient-to-r from-indigo-500 to-purple-500 text-xs mb-5 font-medium text-blue-100 text-center py-2 leading-none rounded-full "
+                                                :style="{ width: (triglicerido * 2 )+ 'px' }"> {{ triglicerido +' / '+triglirango }}</div>
+                                        </div>
+
+                                    </td>
+
+
+
+                                </tr>
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <th scope="row"
+                                        class="px-6 py-10 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Colesterol
+                                    </th>
+                                    <td class="px-6 py-10 w-[600px] absolute overflow-hidden">
+                                        <div class=" bg-gray-200 rounded-full dark:bg-gray-700">
+                                            <div class=" bg-gradient-to-r from-indigo-500 to-purple-500 text-xs mb-5 font-medium text-blue-100 text-center py-2 leading-none rounded-full "
+                                                :style="{ width: ( colesterol * 2)+ 'px' }"> {{ colesterol+' / '+ colesterolrango }}</div>
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class=" rounded-md border border-gray-100 p-6   flex z-2b col-span-2   "
                 v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md">
                     <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Azucar Consumida </label>
-
-                    <Bar />
-                    
+                    <bar />
                 </div>
             </div>
 
 
-            <div class=" rounded-md border border-gray-100 py-6    flex z-2 w-[600px]">
+
+            <div class=" rounded-md border border-gray-100 py-6  row-span-3 overflow-hidden   place-self-start flex z-2 ">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md">
-                    <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Trigliceridos</label>
+                    
+                    
 
-                    <Rounded />
-                    <button
-                class=" p-2  rounded-md bg-[#2D3688] text-white mt-12 "
-                @click="leerpdf()">Agregar</button>
+                    <Rounded :key="refresh"  :triglicerio="triglicerido" :triglivalue="triglirango" :colesterol="colesterol"  :colesterolrango="colesterolrango" :glucosa="glucosacal" :glucosacal="glucosacalrango"/>
+                   
+                    <button class=" p-2  rounded-md bg-[#2D3688] text-white mt-4 "  @click="leerpdf()">Agregar</button>
                 </div>
             </div>
-        </div>
-        
-        
 
-        
+
+
+        </div>
+
+
+
+
+
 
 
 

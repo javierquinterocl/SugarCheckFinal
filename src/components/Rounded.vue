@@ -1,97 +1,151 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const getChartOptions = () => {
-    return {
-        series: [12.5, 3.5, 1.5],
-        colors: ["#1C64F2", "#F7F006", "#FE0E0E", "#fff"],
-        chart: {
-            height: 1200,
-            width: "100%",
-            type: "donut",
-        },
-        stroke: {
-            colors: ["transparent"],
-            lineCap: "",
-        },
-        plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                        name: {
-                            show: true,
-                            fontFamily: "Inter, sans-serif",
-                            offsetY: 20,
-                        },
-                        total: {
-                            showAlways: true,
-                            show: true,
-                            label: "Trigliceridos",
-                            fontFamily: "Inter, sans-serif",
-                            formatter: function (w) {
-                                const sum = w.globals.seriesTotals.reduce((a, b) => {
-                                    return a + b
-                                }, 0)
-                                return '' + "Alto "
-                            },
-                        },
-                        value: {
-                            show: true,
-                            fontFamily: "Inter, sans-serif",
-                            offsetY: -20,
-                            formatter: function (value) {
-                                return value + "k"
-                            },
-                        },
-                    },
-                    size: "80%",
-                },
-            },
-        },
-        grid: {
-            padding: {
-                top: -2,
-            },
-        },
-        labels: ["Alto","Medio", "Bajo"],
-        dataLabels: {
-            enabled: false,
-        },
-        legend: {
-            position: "bottom",
-            fontFamily: "Inter, sans-serif",
-        },
-        yaxis: {
-            labels: {
-                formatter: function (value) {
-                    return value + "k"
-                },
-            },
-        },
-        xaxis: {
-            labels: {
-                formatter: function (value) {
-                    return value + "k"
-                },
-            },
-            axisTicks: {
-                show: false,
-            },
-            axisBorder: {
-                show: false,
-            },
-        },
-    }
+
+const props = defineProps({
+    triglicerio: Number,
+    triglivalue: String,
+
+
+});
+
+
+
+const color = ref('#dce2ff')
+
+const calcular = ref("Calcular")
+const valuetrigli = ref(props.triglivalue)
+const valuecal = ref(props.triglicerio);
+
+
+
+const refresh = ref(0);
+const activado = ref(true);
+
+if (props.triglivalue == 'Alto') {
+    color.value = "#fc3131"
+    calcular.value = props.triglivalue;
+    valuecal.value = props.triglicerio
+    refresh.value++;
+}
+if (props.triglivalue == 'Bajo') {
+    color.value = "#315afc"
+    calcular.value = props.triglivalue;
+    valuecal.value = props.triglicerio
+    refresh.value++;
+
+} if (props.triglivalue == 'Medio') {
+    color.value = "#fcbc31"
+    calcular.value = props.triglivalue;
+    valuecal.value = props.triglicerio
+    refresh.value++;
 }
 
-onMounted(() => {
-    const donus = document.querySelector('#donut-chart')
-    if (donus && typeof ApexCharts !== 'undefined') {
-        const chart = new ApexCharts(donus, getChartOptions());
-        chart.render();
+
+if (refresh.value > 0) {
+    activado.value = false;
+    const getChartOptions = () => {
+        return {
+            series: [valuecal.value],
+            colors: [color.value],
+            chart: {
+                height: 1200,
+                width: "100%",
+                type: "donut",
+            },
+            stroke: {
+                colors: ["transparent"],
+                lineCap: "",
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        labels: {
+                            show: true,
+                            name: {
+                                show: true,
+                                fontFamily: "Inter, sans-serif",
+                                offsetY: 20,
+                            },
+                            total: {
+                                showAlways: true,
+                                show: true,
+                                label: "Trigliceridos",
+                                fontFamily: "Inter, sans-serif",
+                                formatter: function (w) {
+                                    const sum = w.globals.seriesTotals.reduce((a, b) => {
+                                        return a + b
+                                    }, 0)
+
+
+                                    return valuecal.value + ' / ' + calcular.value
+                                },
+                            },
+                            value: {
+                                show: true,
+                                fontFamily: "Inter, sans-serif",
+                                offsetY: -20,
+                                formatter: function (value) {
+                                    return value + "k"
+                                },
+                            },
+                        },
+                        size: "80%",
+                    },
+                },
+            },
+            grid: {
+                padding: {
+                    top: -2,
+                },
+            },
+            labels: [`${calcular.value}`],
+            dataLabels: {
+                enabled: false,
+            },
+            legend: {
+                position: "bottom",
+                fontFamily: "Inter, sans-serif",
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        return value + " Triglicerio"
+                    },
+                },
+            },
+            xaxis: {
+                labels: {
+                    formatter: function (value) {
+                        return value + "k"
+                    },
+                },
+                axisTicks: {
+                    show: false,
+                },
+                axisBorder: {
+                    show: false,
+                },
+            },
+        }
     }
-})
+
+    onMounted(() => {
+        const donus = document.querySelector('#donut-chart')
+        if (donus && typeof ApexCharts !== 'undefined') {
+            const chart = new ApexCharts(donus, getChartOptions());
+            chart.render();
+
+        }
+    })
+}
+console.log(valuecal.value);
+
+
+
+
+
+
 
 </script>
 
@@ -99,7 +153,7 @@ onMounted(() => {
 <template>
     <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
 
-        <div class="flex justify-between mb-3">
+        <div class="flex justify-between">
             <div class="flex justify-center items-center">
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">Trigliceridos Grafica</h5>
                 <svg data-popover-target="chart-info" data-popover-placement="bottom"
@@ -152,13 +206,46 @@ onMounted(() => {
         </div>
 
         <!-- Donut Chart -->
-        <div class="py-6" id="donut-chart"></div>
+
+        <div class=" py-6 " id="donut-chart">
+
+            <div class="" v-if="activado">
+                <label class=" text-slate-600 text-center mx-auto" for="">Ingresar PDF Medico </label>
+                <svg viewBox="0 0 40 40" width="300px" height="400px">
+                    <circle cx="20" cy="20" r="16" fill="transparent" stroke="#dce2ff" stroke-width="4" />
+                    <circle cx="20" cy="20" r="16" fill="transparent" stroke="#dce2ff" stroke-width="4"
+                        :stroke-dasharray="circumference" :stroke-dashoffset="progressOffset" />
+                </svg>
+            </div>
+
+        </div>
+
+
 
         <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
             <div class="flex justify-between items-center pt-5">
-              
-              
+
+                <span class="flex items-center text-sm text-gray-400 dark:text-white me-3"><span
+                        class="flex w-2.5 h-2.5 bg-blue-600 rounded-full me-1.5 flex-shrink-0"></span>Bajo</span>
+                <span class="flex items-center text-sm text-gray-400 dark:text-white me-3"><span
+                        class="flex w-2.5 h-2.5 bg-[#fcbc31] rounded-full me-1.5 flex-shrink-0"></span>Medio</span>
+                <span class="flex items-center text-sm text-gray-400 dark:text-white me-3"><span
+                        class="flex w-2.5 h-2.5 bg-[#fc3131] rounded-full me-1.5 flex-shrink-0"></span>Alto</span>
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+.foreign-object-container {
+    display: inline-flex;
+    overflow: hidden;
+    position: sticky;
+    position: -webkit-sticky;
+}
+
+foreignObject {
+    display: none;
+
+}
+</style>
