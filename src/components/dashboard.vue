@@ -663,7 +663,7 @@ function closedpdf() {
                >Agregar</button>
         </div>
 
-        <div class="grid  grid-flow-col  place-content-stretch  ">
+        <div class="  flex  ">
             <div class=" rounded-md border border-gray-100 p-6   flex z-2  col-span-2 "
                 v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md ">
