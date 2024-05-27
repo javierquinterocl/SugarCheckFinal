@@ -375,8 +375,8 @@ function closedpdf() {
 
             <li class="mb-1 group">
                 <RouterLink to="/"
-                    class="flex items-center py-2 px-4 space-x-2 text-gray-500 hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-[#fe6b81] hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <svg class="w-6 h-6 text-[#fe6b81] dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4" />
@@ -663,7 +663,7 @@ function closedpdf() {
                >Agregar</button>
         </div>
 
-        <div class="  flex  ">
+        <div class="  grid  grid-flow-col  place-content-stretch  ">
             <div class=" rounded-md border border-gray-100 p-6   flex z-2  col-span-2 "
                 v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md ">
