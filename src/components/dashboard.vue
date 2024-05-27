@@ -259,7 +259,7 @@ function closedpdf() {
 }
 
 
-
+// start: Sidebar
 
 
 
@@ -271,16 +271,16 @@ function closedpdf() {
 
 
 <template>
-    <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 transition-transform space-y-6">
-        <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
+    <div class="fixed left-0 top-0 w-64 h-full bg-white p-4 z-50 transition-transform space-y-6">
+        <a href="#" class="flex items-center pb-4">
             <img src="/src/img/logov2.png" alt="" class="w-8 h-8 rounded object-cover">
-            <span class="text-lg font-bold text-white ml-3">Sugar Check</span>
+            <span class="text-lg font-bold text-black ml-3">Sugar Check</span>
         </a>
         <ul class="mt-4 space-y-4">
             <li class="mb-1 group active">
                 <a
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-gray-300 hover:bg-[#ff406a] hover:text-gray-100 rounded-md group-[.active]:bg-[#5046e4] group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <svg class="w-6 h-6 text-white  " aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
@@ -292,8 +292,8 @@ function closedpdf() {
             <li class="mb-1 group">
 
                 <button @click="openventana()"
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-gray-500 hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <svg class="w-6 h-6 text-gray-500  hover:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -304,7 +304,7 @@ function closedpdf() {
                             clip-rule="evenodd" />
                     </svg>
 
-                    <button class="text-sm">Calcular IMC</button>
+                    <button class="text-sm ">Calcular IMC</button>
 
                 </button>
 
@@ -312,8 +312,8 @@ function closedpdf() {
 
             <li class="mb-1 group">
                 <button @click="leerpdf()"
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-gray-500 hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -329,8 +329,8 @@ function closedpdf() {
 
             <li class="mb-1 group">
                 <a href="#" @click="openventana2()"
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-gray-500 hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
                         <path
@@ -345,8 +345,8 @@ function closedpdf() {
 
             <li class="mb-1 group">
                 <a href="#" @click="openventana3()"
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-gray-500 hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-width="2"
                             d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
@@ -360,8 +360,8 @@ function closedpdf() {
 
             <li class="mb-1 group">
                 <a href="#" @click="somatotipoOpen()"
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-gray-500 hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z" />
@@ -375,8 +375,8 @@ function closedpdf() {
 
             <li class="mb-1 group">
                 <RouterLink to="/"
-                    class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                    class="flex items-center py-2 px-4 space-x-2 text-gray-500 hover:bg-gray-300 w-full hover:text-black rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4" />
@@ -418,6 +418,7 @@ function closedpdf() {
                     <div class="flex justify-between mb-6">
 
                         <div>
+                            
                             <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
                                 <div class=" bg-gradient-to-r from-indigo-500 to-purple-500 text-xs mb-5 font-medium text-blue-100 text-center leading-none rounded-full "
                                     :style="{ width: imc + '0px' }"> {{ imc }}</div>
@@ -428,7 +429,7 @@ function closedpdf() {
 
                     </div>
                     <button href="#" @click="openventana()"
-                        class="text-blue-500 font-medium text-sm hover:text-blue-600 ">Calcular IMC</button>
+                        class="text-[#5046e4] font-medium text-sm hover:text-blue-600 ">Calcular IMC</button>
                 </div>
                 <div class="  rounded-md border border-gray-100 p-12 shadow-md shadow-black/5 bg-white"
                     v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }">
@@ -440,7 +441,7 @@ function closedpdf() {
 
                     </div>
                     <button @click="openventana2()" href="#"
-                        class="text-blue-500 font-medium text-sm hover:text-blue-600">Calcular Glucosa</button>
+                        class="text-[#5046e4] font-medium text-sm hover:text-blue-600">Calcular Glucosa</button>
                 </div>
 
                 <div class="  rounded-md border border-gray-100 p-12 shadow-md shadow-black/5 bg-white"
@@ -453,7 +454,7 @@ function closedpdf() {
 
                     </div>
                     <button @click="openventana3()" href="#"
-                        class="text-blue-500 font-medium text-sm hover:text-blue-600">Calcular azucar en la
+                        class="text-[#5046e4] font-medium text-sm hover:text-blue-600">Calcular azucar en la
                         sangre</button>
                 </div>
 
@@ -481,7 +482,7 @@ function closedpdf() {
                 <label for="" class="mt-3 font-semibold">Ingrese su altura: </label>
                 <input type="text" name="" id="Altura" v-model="altura" placeholder="Altura (m)"
                     class=" mt-5 border-b-2 border-gray-200 p-1 outline-none rounded">
-                <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-8 "
+                <button class=" p-2 text-center rounded-md bg-[#5046e4] text-white mt-8 "
                     @click="closedventana()">Calcular</button>
             </div>
 
@@ -543,7 +544,7 @@ function closedpdf() {
                         </div>
                     </div>
                     <button type="submit"
-                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="text-white inline-flex items-center bg-[#5046e4] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         @click="closedventana2()">
                         <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -574,7 +575,7 @@ function closedpdf() {
                 <label class="font-semibold " for="">Ingrese la concentracion de azucar en la sangre: </label>
                 <input type="text" name="" id="Concentracion" v-model="concentracion" placeholder="mg/dl"
                     class=" mt-5 mb-3 border-b-2 border-gray-200 p-1 outline-none rounded">
-                <button class=" p-2 text-center rounded-md bg-[#2D3688] text-white mt-12 "
+                <button class=" p-2 text-center rounded-md bg-[#5046e4] text-white mt-12 "
                     @click="closedventana3()">Calcular</button>
             </div>
 
@@ -658,7 +659,7 @@ function closedpdf() {
             </div>
 
             <button @click="closedpdf()"
-                class=" p-2 text-center absolute rounded-md bg-[#2D3688] text-white mt-12 bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                class=" p-2 text-center absolute rounded-md bg-[#5046e4] text-white mt-12 bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                >Agregar</button>
         </div>
 
@@ -666,7 +667,7 @@ function closedpdf() {
             <div class=" rounded-md border border-gray-100 p-6   flex z-2  col-span-2 "
                 v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md ">
-                    <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Azucar Consumida </label>
+                    <label class="font-semibold mx-auto text-purple-500 mb-10" for="">Grafica Informe Medico </label>
 
                     <div class="relative  shadow-md sm:rounded-lg place-self-center w-[1000px] overflow-hidden ">
                         <table
@@ -746,13 +747,13 @@ function closedpdf() {
 
 
 
-            <div class=" rounded-md border border-gray-100 p-6   flex z-2b col-span-2   "
+            <!-- <div class=" rounded-md border border-gray-100 p-6   flex z-2b col-span-2   "
                 v-bind:class="{ ' border-none blur-sm': ventana || ventana2 || ventana3 || ventanasoma }" v-if="true">
                 <div class="flex  flex-col bg-white p-6 shadow-md shadow-black/5 rounded-md">
                     <label class="font-semibold mx-auto text-gray-500 mb-10" for="">Grafica Azucar Consumida </label>
                     <bar />
                 </div>
-            </div>
+            </div> -->
 
 
 
@@ -763,7 +764,7 @@ function closedpdf() {
 
                     <Rounded :key="refresh"  :triglicerio="triglicerido" :triglivalue="triglirango" :colesterol="colesterol"  :colesterolrango="colesterolrango" :glucosa="glucosacal" :glucosacal="glucosacalrango"/>
                    
-                    <button class=" p-2  rounded-md bg-[#2D3688] text-white mt-4 "  @click="leerpdf()">Agregar</button>
+                    <button class=" p-2  rounded-md bg-[#5046e4] text-white mt-4 "  @click="leerpdf()">Agregar</button>
                 </div>
             </div>
 

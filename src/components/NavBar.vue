@@ -4,7 +4,7 @@
         <div class=" flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <span
-                    class="self-center text-2xl font-semibold whitespace-nowrap bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent ">Bienvenido</span>
+                    class="self-center text-2xl font-semibold whitespace-nowrap bg-gradient-to-r from-[#ff406a] to-purple-400 bg-clip-text text-transparent ">Bienvenido</span>
             </a>
             <div class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <button type="button"

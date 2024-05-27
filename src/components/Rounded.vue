@@ -23,19 +23,19 @@ const refresh = ref(0);
 const activado = ref(true);
 
 if (props.triglivalue == 'Alto') {
-    color.value = "#fc3131"
+    color.value = "#ff406a"
     calcular.value = props.triglivalue;
     valuecal.value = props.triglicerio
     refresh.value++;
 }
 if (props.triglivalue == 'Bajo') {
-    color.value = "#315afc"
+    color.value = "#21bf83"
     calcular.value = props.triglivalue;
     valuecal.value = props.triglicerio
     refresh.value++;
 
 } if (props.triglivalue == 'Medio') {
-    color.value = "#fcbc31"
+    color.value = "#fc8919"
     calcular.value = props.triglivalue;
     valuecal.value = props.triglicerio
     refresh.value++;
@@ -209,9 +209,9 @@ console.log(valuecal.value);
 
         <div class=" py-6 " id="donut-chart">
 
-            <div class="" v-if="activado">
+            <div class=" mx-auto" v-if="activado">
                 <label class=" text-slate-600 text-center mx-auto" for="">Ingresar PDF Medico </label>
-                <svg viewBox="0 0 40 40" width="300px" height="400px">
+                <svg viewBox="0 0 40 40" width="300px" height="220px">
                     <circle cx="20" cy="20" r="16" fill="transparent" stroke="#dce2ff" stroke-width="4" />
                     <circle cx="20" cy="20" r="16" fill="transparent" stroke="#dce2ff" stroke-width="4"
                         :stroke-dasharray="circumference" :stroke-dashoffset="progressOffset" />
@@ -226,7 +226,7 @@ console.log(valuecal.value);
             <div class="flex justify-between items-center pt-5">
 
                 <span class="flex items-center text-sm text-gray-400 dark:text-white me-3"><span
-                        class="flex w-2.5 h-2.5 bg-blue-600 rounded-full me-1.5 flex-shrink-0"></span>Bajo</span>
+                        class="flex w-2.5 h-2.5 bg-[#21bf83] rounded-full me-1.5 flex-shrink-0"></span>Bajo</span>
                 <span class="flex items-center text-sm text-gray-400 dark:text-white me-3"><span
                         class="flex w-2.5 h-2.5 bg-[#fcbc31] rounded-full me-1.5 flex-shrink-0"></span>Medio</span>
                 <span class="flex items-center text-sm text-gray-400 dark:text-white me-3"><span
