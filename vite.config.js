@@ -18,6 +18,6 @@ export default defineConfig({
     build: {
       target: ["chrome89", "edge89", "firefox89", "safari15"]
    },
-   base: 'https://javierquinterocl.github.io/SugarCheckFinal'
+   base: 'https://javierquinterocl.github.io/SugarCheckFinal/'
   }
 })
